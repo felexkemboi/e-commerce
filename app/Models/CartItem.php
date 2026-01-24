@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class CartItem extends Model
 {
-    public function product() {
+    public function product()
+    {
         return $this->belongsTo(Product::class);
     }
 }
