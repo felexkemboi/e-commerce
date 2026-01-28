@@ -12,3 +12,17 @@
 - Run `php artisan migrate --seed` to migrate and seed your Database with mock data
 - Run `php artisan serve` to fire up the Laravel server in another terminal tab
 - Head over to `http://localhost:8000`
+
+
+    {
+        path: '/',
+        name: 'dashboard',
+        component: Dashboard,
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/products',
+        name: 'products',
+        component: ProductList,
+        meta: { requiresAuth: true }
+    },
