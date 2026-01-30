@@ -36,4 +36,11 @@ class CartController extends Controller
 
         return redirect()->back();
     }
+
+    public function remove(CartItem $cartItem)
+    {
+        $cartItem->delete();
+
+        return response()->json(['message' => 'Item removed']);
+    }
 }
