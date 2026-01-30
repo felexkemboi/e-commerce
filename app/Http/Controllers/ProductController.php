@@ -13,7 +13,6 @@ class ProductController extends Controller
 
         $user = Auth::user();
 
-        \Log::Debug('Authenticated User:', ['user' => $user]);
         return Inertia::render('Dashboard', [
             'products' => Product::all(),
             'user' => $user,
