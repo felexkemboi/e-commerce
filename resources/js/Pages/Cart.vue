@@ -5,7 +5,7 @@ import { ref } from "vue";
 import { route } from "ziggy-js";
 
 const props = defineProps({
-    cartItems: Array, 
+    cartItems: Array,
 });
 
 const updateQuantity = (cartItem, event) => {
@@ -63,6 +63,7 @@ const total = () => {
                                 type="number"
                                 class="border rounded px-2 py-1 w-16"
                                 :value="cartItem.quantity"
+                                min="1"
                                 @change="updateQuantity(cartItem, $event)"
                             />
                             <button
