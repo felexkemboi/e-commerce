@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Seeder;
@@ -20,6 +21,8 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
             'password' => Hash::make('password123'),
         ]);
 
