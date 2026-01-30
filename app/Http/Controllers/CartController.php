@@ -92,4 +92,18 @@ class CartController extends Controller
 
         return response()->json(['message' => 'Item removed']);
     }
+
+    public function cartHistory()
+    {
+        $user = Auth::user();
+
+        $cartActions = CartAction::with('product')
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('CartHistory', [
+            'cartActions' => $cartActions,
+        ]);
+    }
 }

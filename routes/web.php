@@ -12,6 +12,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
     Route::delete('/cart/{cartItem}', [CartController::class, 'remove'])->name('cart.remove');
     Route::patch('/cart/update/{cartItem}', [CartController::class, 'update'])->name('cart.update');
+    Route::get('/cart/history', [CartController::class, 'cartHistory'])->name('cart.history');
 
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
