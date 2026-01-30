@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use Illuminate\Http\JsonResponse;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function index(): JsonResponse
+    public function index()
     {
-        return response()->json([
-            'status' => 'success',
-            'data' => Product::all(),
-        ], 200);
+
+        $user = Auth::user();
+
+        \Log::Debug('Authenticated User:', ['user' => $user]);
+        return Inertia::render('Dashboard', [
+            'products' => Product::all(),
+            'user' => $user,
+            'cartItems' => $user ? $user->cartItems->pluck('product_id') : []
+        ]);
     }
 }
