@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\CartItem;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Product;
@@ -18,14 +19,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@example.com',
-            'email_verified_at' => now(),
-            'remember_token' => Str::random(10),
-            'password' => Hash::make('password123'),
-        ]);
+        User::firstOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name' => 'Admin User',
+                'email_verified_at' => now(),
+                'remember_token' => Str::random(10),
+                'password' => Hash::make('password123'),
+            ]
+        );
 
         Product::factory(50)->create();
+        CartItem::factory(10)->create();
     }
 }
