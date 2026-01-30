@@ -1,28 +1,21 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue'
-import { Head } from '@inertiajs/vue3'
-import { ref } from 'vue'
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
+import { Head } from "@inertiajs/vue3";
 
-const products = ref([
-    {
-        id: 1,
-        name: "Product 1",
-        description: "Description of Product 1",
-        price: 29.99,
-        image: "https://via.placeholder.com/300"
-    },
-    {
-        id: 2,
-        name: "Product 2",
-        description: "Description of Product 2",
-        price: 39.99,
-        image: "https://via.placeholder.com/300"
-    }
-])
+const props = defineProps({
+    products: Array,
+    cartItems: Array,
+    user: Object,
+});
+
+
+const isInCart = (productId) => {
+    return props.cartItems.includes(productId);
+};
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Products" />
 
     <AuthenticatedLayout>
         <template #header>
@@ -33,7 +26,9 @@ const products = ref([
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto p-6">
-                <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div
+                    class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6"
+                >
                     <div
                         v-for="product in products"
                         :key="product.id"
@@ -43,15 +38,19 @@ const products = ref([
                             {{ product.name }}
                         </h2>
 
-                        <p class="text-gray-700 mb-4">
-                            {{ product.description }}
+                        <p class="text-gray-600 mb-2">
+                            Price: KES {{ product.price }}
                         </p>
 
-                        <div class="mt-auto">
-                            <span class="text-xl font-bold text-indigo-600">
-                                ${{ product.price.toFixed(2) }}
-                            </span>
-                        </div>
+                        <button
+                            :disabled="isInCart(product.id)"
+                            class="mt-4 px-4 py-2 rounded"
+                            :class="isInCart(product.id)
+                                ? 'bg-gray-400 cursor-not-allowed'
+                                : 'bg-black text-white hover:bg-gray-800'"
+                        >
+                            {{ isInCart(product.id) ? 'In Cart' : 'Add to Cart' }}
+                        </button>
                     </div>
                 </div>
             </div>
