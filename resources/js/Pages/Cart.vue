@@ -3,6 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { route } from "ziggy-js";
+import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
     cartItems: Array,
@@ -35,11 +36,20 @@ const total = () => {
     <Head title="Shopping Cart" />
 
     <AuthenticatedLayout>
-        <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Your Cart
-            </h2>
-        </template>
+<template #header>
+    <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold leading-tight text-gray-800">
+            Your Cart
+        </h2>
+
+        <Link
+            :href="route('dashboard')"
+            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+            Continue Shopping
+        </Link>
+    </div>
+</template>
 
         <div class="py-12">
             <div class="max-w-4xl mx-auto p-6">

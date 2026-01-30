@@ -37,6 +37,20 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+
+    public function update(Request $request, CartItem $cartItem)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cartItem->update([
+            'quantity' => $request->quantity,
+        ]);
+
+        return response()->json(['message' => 'Item updated']);
+    }
+
     public function remove(CartItem $cartItem)
     {
         $cartItem->delete();
