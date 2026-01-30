@@ -5,10 +5,9 @@ import { ref } from "vue";
 import { route } from "ziggy-js";
 
 const props = defineProps({
-    cartItems: Array, // each cart item includes `product` relation
+    cartItems: Array, 
 });
 
-// Update quantity
 const updateQuantity = (cartItem, event) => {
     const quantity = parseInt(event.target.value);
     if (quantity < 1) return;
@@ -19,7 +18,6 @@ const updateQuantity = (cartItem, event) => {
         });
 };
 
-// Remove item from cart
 const removeItem = (cartItem) => {
     window.axios.delete(route('cart.remove', cartItem.id))
         .then(() => {
@@ -28,7 +26,6 @@ const removeItem = (cartItem) => {
         });
 };
 
-// Compute total
 const total = () => {
     return props.cartItems.reduce((sum, item) => sum + item.quantity * item.product.price, 0);
 };

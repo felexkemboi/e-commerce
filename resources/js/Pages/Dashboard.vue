@@ -12,11 +12,10 @@ const props = defineProps({
 
 const cartItemsLocal = ref([...props.cartItems]);
 
+const cartCount = ref(props.cartItems.length);
 
-// Search query
 const searchQuery = ref("");
 
-// Filter products by search
 const filteredProducts = computed(() => {
     if (!searchQuery.value) return props.products;
     return props.products.filter((product) =>
@@ -24,17 +23,16 @@ const filteredProducts = computed(() => {
     );
 });
 
-// Check if product is already in cart
 const isInCart = (productId) => {
     return props.cartItems.includes(productId);
 };
 
-// Add product to cart using Inertia POST
 const addToCart = (productId) => {
     if (!isInCart(productId)) {
+
         window.axios.post(route("cart.add", productId)).then(() => {
-            // Optimistically update cartItems
             props.cartItems.push(productId);
+            cartCount.value++;
         });
     }
 };
@@ -46,12 +44,10 @@ const addToCart = (productId) => {
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between space-x-4">
-                <!-- Title on far left -->
                 <h2 class="text-xl font-semibold leading-tight text-gray-800">
                     Products
                 </h2>
 
-                <!-- Search Input in the middle -->
                 <input
                     type="text"
                     v-model="searchQuery"
@@ -59,7 +55,6 @@ const addToCart = (productId) => {
                     class="flex-1 border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black mx-4"
                 />
 
-                <!-- Cart Button on far right -->
                 <Link
                     href="/cart"
                     class="flex items-center space-x-2 bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
@@ -74,7 +69,7 @@ const addToCart = (productId) => {
                             d="M16 11V9a4 4 0 10-8 0v2H5a1 1 0 000 2h1v5a1 1 0 102 0v-5h4v5a1 1 0 102 0v-5h1a1 1 0 100-2h-1z"
                         />
                     </svg>
-                    <span>{{ cartItemsLocal.length }}</span>
+                    <span>{{ cartCount }}</span>
                 </Link>
             </div>
         </template>
