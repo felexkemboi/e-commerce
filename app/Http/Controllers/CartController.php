@@ -14,6 +14,18 @@ class CartController extends Controller
 {
     use AuthorizesRequests;
 
+    public function dashboard()
+    {
+
+        $user = Auth::user();
+
+        return Inertia::render('Dashboard', [
+            'products' => Product::all(),
+            'user' => $user,
+            'cartItems' => $user ? $user->cartItems->pluck('product_id') : []
+        ]);
+    }
+
     public function index()
     {
         $user = Auth::user();
@@ -25,14 +37,14 @@ class CartController extends Controller
         ]);
     }
 
-    public function add(Request $request, Product $product)
+    public function add(CartItem $cartItem)
     {
+        $this->authorize('add', $cartItem);
+
         $user = Auth::user();
 
-        $this->authorize('add', $product);
-
         $cartItem = CartItem::firstOrCreate(
-            ['user_id' => $user->id, 'product_id' => $product->id],
+            ['user_id' => $user->id, 'product_id' => $cartItem->product_id],
             ['quantity' => 1]
         );
 
@@ -42,12 +54,13 @@ class CartController extends Controller
 
         CartAction::create([
             'user_id' => $user->id,
-            'product_id' => $product->id,
+            'product_id' => $cartItem->product_id,
             'action' => 'add',
             'quantity' => 1
         ]);
 
-        return redirect()->back();
+
+        return response()->json(['message' => 'Item Added to cart']);
     }
 
 

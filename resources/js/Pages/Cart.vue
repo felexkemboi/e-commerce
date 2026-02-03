@@ -3,7 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
 import { ref } from "vue";
 import { route } from "ziggy-js";
-import { Link } from '@inertiajs/vue3';
+import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
     cartItems: Array,
@@ -13,22 +13,27 @@ const updateQuantity = (cartItem, event) => {
     const quantity = parseInt(event.target.value);
     if (quantity < 1) return;
 
-    window.axios.patch(route('cart.update', cartItem.id), { quantity })
+    window.axios
+        .patch(route("cart.update", cartItem.id), { quantity })
         .then(() => {
             cartItem.quantity = quantity;
         });
 };
 
 const removeItem = (cartItem) => {
-    window.axios.delete(route('cart.remove', cartItem.id))
-        .then(() => {
-            const index = props.cartItems.findIndex(item => item.id === cartItem.id);
-            if (index !== -1) props.cartItems.splice(index, 1);
-        });
+    window.axios.delete(route("cart.remove", cartItem.id)).then(() => {
+        const index = props.cartItems.findIndex(
+            (item) => item.id === cartItem.id,
+        );
+        if (index !== -1) props.cartItems.splice(index, 1);
+    });
 };
 
 const total = () => {
-    return props.cartItems.reduce((sum, item) => sum + item.quantity * item.product.price, 0);
+    return props.cartItems.reduce(
+        (sum, item) => sum + item.quantity * item.product.price,
+        0,
+    );
 };
 </script>
 
@@ -36,20 +41,29 @@ const total = () => {
     <Head title="Shopping Cart" />
 
     <AuthenticatedLayout>
-<template #header>
-    <div class="flex items-center justify-between">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            Your Cart
-        </h2>
+        <template #header>
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                    Your Cart
+                </h2>
 
-        <Link
-            :href="route('dashboard')"
-            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-            Continue Shopping
-        </Link>
-    </div>
-</template>
+                <div class="flex items-center space-x-3">
+                    <Link
+                        :href="route('dashboard')"
+                        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    >
+                        Continue Shopping
+                    </Link>
+
+                    <Link
+                        :href="route('cart.history')"
+                        class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800"
+                    >
+                        History
+                    </Link>
+                </div>
+            </div>
+        </template>
 
         <div class="py-12">
             <div class="max-w-4xl mx-auto p-6">
@@ -64,8 +78,10 @@ const total = () => {
                         class="flex items-center justify-between border rounded p-4"
                     >
                         <div class="flex-1">
-                            <h3 class="font-semibold">{{ cartItem.product.name }}</h3>
-                            <p>Price: KES {{ cartItem.product.price }}</p>
+                            <h3 class="font-semibold">
+                                {{ cartItem.product.name }}
+                            </h3>
+                            <p>Price: {{ cartItem.product.price }}$</p>
                         </div>
 
                         <div class="flex items-center space-x-2">

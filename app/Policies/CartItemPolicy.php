@@ -27,9 +27,9 @@ class CartItemPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user): bool
+    public function create(User $user, CartItem $cartItem): bool
     {
-        return false;
+        return $user->id === $cartItem->user_id;
     }
 
     /**
@@ -54,6 +54,11 @@ class CartItemPolicy
     public function restore(User $user, CartItem $cartItem): bool
     {
         return false;
+    }
+
+    public function add(User $user, CartItem $cartItem): bool
+    {
+        return $user->id === $cartItem->user_id;
     }
 
     /**

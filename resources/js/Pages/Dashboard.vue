@@ -29,7 +29,6 @@ const isInCart = (productId) => {
 
 const addToCart = (productId) => {
     if (!isInCart(productId)) {
-
         window.axios.post(route("cart.add", productId)).then(() => {
             props.cartItems.push(productId);
             cartCount.value++;
@@ -89,7 +88,7 @@ const addToCart = (productId) => {
                         </h2>
 
                         <p class="text-gray-600 mb-2">
-                            Price: KES {{ product.price }}
+                            Price: {{ product.price }}$
                         </p>
 
                         <p class="text-gray-500 mb-2">
