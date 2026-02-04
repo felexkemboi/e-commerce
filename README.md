@@ -1,6 +1,7 @@
 ## Steps of setting up the project locally
 
 - clone the repository using the command `git clone git@github.com:felexkemboi/e-commerce.git`
+- change the directory to the root directory `cd e-commerce`
 - Run `composer install` to install necessary packages
 - Run `npm install` to install Javascript packages(make sure you have node version 20)
 - Run `npm run build` to install Javascript packages(make sure you have node version 20)
