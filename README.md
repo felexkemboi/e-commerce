@@ -12,6 +12,6 @@
 - Run `php artisan migrate --seed` to migrate and seed your Database with mock data
 - Run `php artisan serve` to fire up the Laravel server in another terminal tab
 - Head over to `http://localhost:8000`
-- Login using `admin@example.com` as email and `password123` as password
+- Login using `admin@ecommerce.com` as email and `password123` as password
 - Open a new tab in terminal and run `php artisan queue:work` to queue its jobs
 - Run `php artisan stock:check` to check stock to see which products need to be restocked.(Check log file to see emails sent)
