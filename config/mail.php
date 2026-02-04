@@ -111,8 +111,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'admin@ecommerce.com'),
+        'name' => env('MAIL_FROM_NAME', 'Ecommerce Platform'),
     ],
 
     'low_stock_emails' => env('LOW_STOCK_EMAILS'),
