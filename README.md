@@ -6,7 +6,7 @@
 - Run `npm install` to install Javascript packages(make sure you have node version 20)
 - Run `npm run build` to install Javascript packages(make sure you have node version 20)
 - Have MYSQL installed and create a database
-- Copy file `cp .env.example` to `.env` in the root directory
+- Copy file `cp .env.example .env` in the root directory
 - Update the db name, user and password of your Database configurations in your .env file
 - Run `php artisan key:generate` to generate key for the app(if it will be missing)
 - Run `composer dump-autoload`
