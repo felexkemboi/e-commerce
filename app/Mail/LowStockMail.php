@@ -11,16 +11,21 @@ class LowStockMail extends Mailable
     use Queueable;
     use SerializesModels;
 
-    public function __construct(public $product)
+    /**
+     * Create a new message instance.
+     */
+    public function __construct(public $products)
     {
+        $this->products = $products;
     }
+
     public function build()
     {
         return $this->subject('Low Stock Alert')
             ->from('admin@ecommerce.com', 'Ecommerce Platform')
-            ->view('emails.low-stock')
+            ->view('emails.low_stock')
             ->with([
-                'product' => $this->product,
+                'products' => $this->products,
             ]);
     }
 }
