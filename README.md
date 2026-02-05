@@ -14,7 +14,8 @@
 - Run `php artisan db:seed` to seed your Database with mock data
 - Run `php artisan serve` to fire up the Laravel server in another terminal tab
 - Open a new tab in terminal and run `php artisan queue:work` to queue its jobs
-- Run `php artisan report:sales` to check stock to see which products need to be restocked.(Check log file to see emails sent)
+- Run `php artisan report:stock` to check stock to see which products need to be restocked.(Check log file to see emails sent)
+- Run `php artisan report:sales` to check products that were sold that day.(Check log file to see emails sent)
 - Head over to `http://localhost:8000`
 - Login using `admin@ecommerce.com` as email and `password123` as password
 
@@ -25,3 +26,6 @@
  - In cart page, you can increase the number of items or remove the item from the cart
  - In cart page, you can check the history of the cart to see the cart actions
  - `php artisan report:sales` command mocks reports and sends restock email to restocking staff
+ - `php artisan report:stock` command mocks reports of sales of that day
+ - Any product added to the cart on that day is assumed as 'sold'
+ - Daily sales reports finds all the documents in the user's cart on that day

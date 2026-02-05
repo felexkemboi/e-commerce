@@ -116,5 +116,6 @@ return [
     ],
 
     'low_stock_emails' => env('LOW_STOCK_EMAILS'),
+    'daily_sales_report' => env('DAILY_SALES_REPORT_EMAILS'),
 
 ];
