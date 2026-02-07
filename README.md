@@ -6,7 +6,6 @@
 - Run `npm install` to install Javascript packages(make sure you have node version 20)
 - Run `composer dump-autoload`
 - Run `npm run build` to install Javascript packages(make sure you have node version 20) and should remain on it's own tab
-- Have MYSQL installed and create a database
 - Copy file `cp .env.example .env` in the root directory
 - Run `php artisan key:generate` to generate key for the app(if it will be missing)
 - Create the database file `touch database/database.sqlite`
