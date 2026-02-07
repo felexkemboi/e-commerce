@@ -12,7 +12,7 @@
 - Run `php artisan migrate` to migrate the tables
 - Run `php artisan db:seed` to seed your Database with mock data
 - Run `php artisan serve` to fire up the Laravel server in another terminal tab
-- Open a new tab in terminal and run `php artisan queue:work` to queue its jobs
+- Open a new tab in terminal and run `php artisan queue:work` to queue its jobs(make sure you do this in a different tab)
 - Run `php artisan report:stock` to check stock to see which products need to be restocked.(Check log file to see emails sent)
 - Run `php artisan report:sales` to check products that were sold that day.(Check log file to see emails sent)
 - Head over to `http://localhost:8000`
