@@ -37,14 +37,17 @@ class CartController extends Controller
         ]);
     }
 
-    public function add(CartItem $cartItem)
+    public function add(Product $product)
     {
-        $this->authorize('add', $cartItem);
 
         $user = Auth::user();
 
+        $cartItem = $user->cartItems->first();
+
+        $this->authorize('add', $cartItem);
+
         $cartItem = CartItem::firstOrCreate(
-            ['user_id' => $user->id, 'product_id' => $cartItem->product_id],
+            ['user_id' => $user->id, 'product_id' => $product->id],
             ['quantity' => 1]
         );
 
@@ -64,8 +67,13 @@ class CartController extends Controller
     }
 
 
-    public function update(CartItem $cartItem, Request $request)
+    public function update(Request $request)
     {
+
+        $user = Auth::user();
+
+        $cartItem = $user->cartItems->first();
+
         $this->authorize('update', $cartItem);
 
         $user = Auth::user();
@@ -90,8 +98,12 @@ class CartController extends Controller
         return response()->json(['message' => 'Item updated']);
     }
 
-    public function remove(CartItem $cartItem)
+    public function remove()
     {
+        $user = Auth::user();
+
+        $cartItem = $user->cartItems->first();
+
         $this->authorize('delete', $cartItem);
 
         CartAction::create([

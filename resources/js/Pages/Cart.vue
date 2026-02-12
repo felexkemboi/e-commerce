@@ -102,7 +102,7 @@ const total = () => {
                     </div>
 
                     <div class="text-right font-semibold text-lg mt-4">
-                        Total: KES {{ total() }}
+                        Total: {{ total() }}$
                     </div>
                 </div>
             </div>
